@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +45,7 @@ public class ProductsService implements IProductService{
 
     @Override
     @Transactional
-    public ProductResponse updateProduct(ProductsDto productsDto, Long id, MultipartFile file) throws IOException {
+    public ProductResponse updateProduct(ProductsDto productsDto, Long id)  {
         if (productsDto == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product payload required");
         }
@@ -61,11 +60,6 @@ public class ProductsService implements IProductService{
         products.setExpirationDate(productsDto.getExpirationDate());
         products.setQuantity(productsDto.getQuantity());
 
-        if(file != null && !file.isEmpty()){
-            products.setImageName(file.getOriginalFilename());
-            products.setImageType(file.getContentType());
-            products.setImageData(file.getBytes());
-        }
         productsRepo.save(products);
         ProductsDto  productsDto1 = DtosMapping.mapEntityProductToDto(products);
 
@@ -74,7 +68,7 @@ public class ProductsService implements IProductService{
 
     @Override
     @Transactional
-    public ProductResponse createProduct(ProductsDto productsDto, MultipartFile file) throws IOException {
+    public ProductResponse createProduct(ProductsDto productsDto)  {
         if (productsDto == null) throw new IllegalArgumentException("Product payload required");
 
 
@@ -87,11 +81,6 @@ public class ProductsService implements IProductService{
         products.setExpirationDate(productsDto.getExpirationDate());
         products.setQuantity(productsDto.getQuantity());
 
-        if(file != null && !file.isEmpty()){
-            products.setImageName(file.getOriginalFilename());
-            products.setImageType(file.getContentType());
-            products.setImageData(file.getBytes());
-        }
         Products products1 = productsRepo.save(products);
         ProductsDto productsDto1 = DtosMapping.mapEntityProductToDto(products1);
 
@@ -100,11 +89,11 @@ public class ProductsService implements IProductService{
     }
 
     @Override
-    public ProductResponse deleteProduct(Long id) {
+    public void deleteProduct(Long id) {
         Products products = productsRepo.findById(id)
                 .orElseThrow(()->new RuntimeException("Class not found"));
         productsRepo.delete(products);
         ProductsDto productsDto = DtosMapping.mapEntityProductToDto(products);
-        return new ProductResponse(200, "deleted successfully", productsDto, null);
+        new ProductResponse(200, "deleted successfully", productsDto, null);
     }
 }

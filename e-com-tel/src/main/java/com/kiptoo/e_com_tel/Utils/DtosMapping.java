@@ -8,6 +8,7 @@ public class DtosMapping {
     public static ProductsDto mapEntityProductToDto(Products products) {
         ProductsDto productsDto = new ProductsDto();
 
+        productsDto.setId(products.getId());
         productsDto.setName(products.getName());
         productsDto.setPrice(products.getPrice());
         productsDto.setCategory(products.getCategory());
