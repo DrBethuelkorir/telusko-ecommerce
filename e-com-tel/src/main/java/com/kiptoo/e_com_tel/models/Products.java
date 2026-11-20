@@ -6,8 +6,7 @@
     import lombok.Getter;
     import lombok.NoArgsConstructor;
     import lombok.Setter;
-    import org.springframework.web.multipart.MultipartFile;
-    
+
     import java.math.BigDecimal;
     import java.util.Date;
     
@@ -29,4 +28,8 @@
         private Date expirationDate;
         private boolean available;
         private Long quantity;
+
+        @ManyToOne
+        @JoinColumn(name = "user_id") 
+        private Users user;
     }

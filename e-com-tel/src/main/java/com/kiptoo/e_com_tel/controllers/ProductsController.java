@@ -2,19 +2,13 @@ package com.kiptoo.e_com_tel.controllers;
 
 import com.kiptoo.e_com_tel.Dtos.ProductsDto;
 import com.kiptoo.e_com_tel.Response.ProductResponse;
-import com.kiptoo.e_com_tel.models.Products;
-import com.kiptoo.e_com_tel.service.ProductsService;
+import com.kiptoo.e_com_tel.service.Products.ProductsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.io.IOException;
 
 @RestController
 public class ProductsController {

@@ -1,4 +1,4 @@
-package com.kiptoo.e_com_tel.service;
+package com.kiptoo.e_com_tel.service.Products;
 
 import com.kiptoo.e_com_tel.Dtos.ProductsDto;
 import com.kiptoo.e_com_tel.Response.ProductResponse;
